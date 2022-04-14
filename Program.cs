@@ -15,7 +15,7 @@ namespace TesteDeListas
             List<string> enderecos = new List<string>();// Cria uma lista de strings.
 
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);// Retorna o endereço do desktop na máquina que o programa está funcioando.
-            
+
             string[] diretorios =
                 {
                     desktop,
@@ -26,9 +26,26 @@ namespace TesteDeListas
                     desktop + @"\PEÇAS_PARA_USINAGEM\INSIRA_O_NOME\DESENHO\3D",
                 };
 
+            string[] _3D = { ".ipt", ".stp", ".step", ".STEP", ".igs", ".iges", ".iam" };
+
+            string[] _2D = {".idw", ".dwg", ".dxf"};
+
             try
             {
-                string[] arquivos = Directory.GetFiles(desktop, "*.xlsx");// Retornar apenas arquivos com a extensão selecionada.           
+                string[] arquivos = Directory.GetFiles(desktop, "*.*")
+
+                    //Where(arquivos que terminam com alguma dessas estensões)
+                    .Where(s => s.EndsWith(".ipt")
+                    || s.EndsWith(".stp")
+                    || s.EndsWith(".step")
+                    || s.EndsWith(".STEP")
+                    || s.EndsWith(".igs")
+                    || s.EndsWith(".iges")
+                    || s.EndsWith(".idw")
+                    || s.EndsWith(".dwg")
+                    || s.EndsWith(".dxf")
+                    || s.EndsWith(".art")
+                    || s.EndsWith(".iam")).ToArray();
 
                 foreach (string obj in arquivos)
                 {
@@ -46,7 +63,24 @@ namespace TesteDeListas
                 {
                     try
                     {
-                        File.Move(obj, desktop + @"\PEÇAS_PARA_USINAGEM\" + Path.GetFileNameWithoutExtension(obj) + @"\DESENHO\3D\" + Path.GetFileName(obj));// Move o arquivos  
+                        string caminho = Path.GetFileNameWithoutExtension(obj).Replace(" ", String.Empty);// O caminho da pasta não pode ter espaço em branco.
+
+                        bool arquivo3D = Array.Exists(_3D, x => x == Path.GetExtension(obj));// Verifica se a extensão pertense alguma extensão do array arquivo3D.
+
+                        bool arquivo2D = Array.Exists(_2D, x => x == Path.GetExtension(obj));// Verifica se a extensão pertense alguma extensão do array arquivo2D.
+
+                        if (arquivo3D == true)
+                        {
+                            File.Move(obj, desktop + @"\PEÇAS_PARA_USINAGEM\" + caminho + @"\DESENHO\3D\" + Path.GetFileName(obj));// Move o arquivos.  
+                        }
+                        if (arquivo2D == true)
+                        {
+                            File.Move(obj, desktop + @"\PEÇAS_PARA_USINAGEM\" + caminho + @"\DESENHO\" + Path.GetFileName(obj));// Move o arquivos.  
+                        }
+                        if(Path.GetExtension(obj) == ".art")
+                        {
+                            File.Move(obj, desktop + @"\PEÇAS_PARA_USINAGEM\" + caminho + @"\PROGRAMA\" + Path.GetFileName(obj));// Move o arquivos.
+                        }
                     }
                     catch (Exception)
                     {

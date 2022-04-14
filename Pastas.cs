@@ -17,23 +17,18 @@ namespace TesteDeListas
                 {
                     foreach (string s in pathFile)
                     {
-                        if (!Directory.Exists(s))
+                        string caminho = s.Replace(" ", String.Empty);// O caminho da pasta não pode ter espaço em branco.
+
+                        if (!Directory.Exists(caminho))
                         {
-                            string nomeDaPasta;
-
-                            nomeDaPasta = s.Substring(s.LastIndexOf(@"\") + 1);// Insere o nome da ultima pasta criada na string nomeDaPasta.
-
                             try
                             {
-                                Directory.CreateDirectory(s);
+                                Directory.CreateDirectory(caminho);
                             }
                             catch (Exception)
                             {
-                                if (!s.Contains("*"))
-                                {
-                                    Console.WriteLine("Erro ao tentar criar a pasta com o caminho: " + s);
-                                    Console.ReadKey();
-                                }
+                                Console.WriteLine("Erro ao tentar criar a pasta com o caminho: " + caminho);
+                                Console.ReadKey();
                             }
                         }
                     }
