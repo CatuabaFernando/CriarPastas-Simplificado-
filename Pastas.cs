@@ -45,26 +45,5 @@ namespace TesteDeListas
                 }
             }
         }
-
-        public static void AdicionarEndereco(List<string> pathFile)
-        {
-            if (pathFile.Count == 0)
-            {
-                pathFile.Add(Console.ReadLine());
-            }
-            else
-            {
-                pathFile.Add(pathFile[pathFile.Count - 1] + @"\" + Console.ReadLine());
-            }
-        }
-
-        public static void AdicionarEndereco(string caminho, List<string> pathFile)
-        {
-            string nomeDaPasta = Console.ReadLine();
-            nomeDaPasta = @"\" + nomeDaPasta;
-            caminho += nomeDaPasta;
-
-            pathFile.Add(caminho);
-        }
     }
 }
