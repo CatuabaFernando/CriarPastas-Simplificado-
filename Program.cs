@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+
+/***********************************************PROPRIEDADE DE SAÍDA DO PROJETO FOI ALTERADA DE CONSOLE PARA WINDOWS FORMS PARA EXECULTAR SEM ABRIR TELA PRETA***************************************/
+
 namespace TesteDeListas
 {
     class Program
     {
-        public void teset() { }
         static void Main(string[] args)
         {
             List<string> enderecos = new List<string>();// Cria uma lista de strings.
