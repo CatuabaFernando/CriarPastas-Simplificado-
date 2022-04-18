@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
-
-/***********************************************PROPRIEDADE DE SAÍDA DO PROJETO FOI ALTERADA DE CONSOLE PARA WINDOWS FORMS PARA EXECULTAR SEM ABRIR TELA PRETA***************************************/
 
 namespace TesteDeListas
 {
